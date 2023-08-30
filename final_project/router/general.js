@@ -31,22 +31,28 @@ public_users.post("/register", (req,res) => {
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
-  return res.send(JSON.stringify(books));  
+  // return res.send(JSON.stringify(books));  
+  // Using promises
+  const myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if(books)
+      {
+        resolve(books);
+      }
+      else
+      {
+        reject("Books not found");
+      }
+    }, 1000);
+  })
+
+  myPromise.then((bookinfo) => {
+    return res.status(300).json(bookinfo);
+  })
+  .catch((err) => {
+    return res.status(300).json(err);
+  });
 });
-
-// Using Promises
-// const getAllBooksUsingPromises = (url) => {
-//   const req = axios.get(url);
-//   req.then(resp => {
-//     books = resp.data;
-//     console.log(JSON.stringify(books));
-//   })
-//   .catch(err => {
-//     console.log(err.message);
-//   })
-// }
-
-// getAllBooksUsingPromises('/');
 
 // Using async-await
 // const getBooksAsyncAwait = async () => {
