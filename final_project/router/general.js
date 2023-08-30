@@ -32,6 +32,7 @@ public_users.post("/register", (req,res) => {
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   // return res.send(JSON.stringify(books));  
+  
   // Using promises
   const myPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -53,28 +54,6 @@ public_users.get('/',function (req, res) {
     return res.status(300).json(err);
   });
 });
-
-// Using async-await
-// const getBooksAsyncAwait = async () => {
-//   try {
-//     const res = await axios.get("/");
-//     return res.data;
-//   }
-//   catch (err) {
-//     console.error(err);
-//   }
-// }
-
-// (async () => {
-//   try {
-//     const books = await getBooksAsyncAwait();
-//     console.log(books);
-//   }
-//   catch (err)
-//   {
-//     console.error(err);
-//   }
-// })
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
